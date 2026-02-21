@@ -1,6 +1,11 @@
 import {GameCard} from "@/entities/game/ui/GameCard.tsx";
+import { useQuery } from "@apollo/client/react";
+import {GET_GAMES} from "@/entities/game/api/gameQuery.ts";
 
 function Home() {
+    const {loading,error,data} = useQuery(GET_GAMES);
+    if(loading) return  <p>Loading...</p>
+    if(error) return  <p>Error...</p>
     return (
         <div className="h-full">
             {/* 1. THE IMAGE CONTAINER */}
@@ -19,7 +24,7 @@ function Home() {
             {/* This naturally sits below the image because the image is not absolute */}
             <div className="py-10">
                 <h2 className="text-3xl font-bold">Bestsellers</h2>
-                <GameCard title='resedent Eveil' description='nice game,coming 2026' />
+                {console.log(data)}
             </div>
         </div>
     );
