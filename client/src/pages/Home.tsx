@@ -22,9 +22,18 @@ function Home() {
 
             {/* 2. THE CONTENT SECTION */}
             {/* This naturally sits below the image because the image is not absolute */}
-            <div className="py-10">
-                <h2 className="text-3xl font-bold">Bestsellers</h2>
-                {console.log(data)}
+            <h2 className="text-3xl font-bold flex justify-center items-center pt-10 pb-10">Bestsellers</h2>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                {data?.allGames.map((game: any) => (
+                    <GameCard
+                        key={game.id}
+                        title={game.title}
+                        description={game.description}
+                        price={game.price}
+                        isBestSeller={game.isBestSeller}
+                        imgUrl={game.imgUrl}
+                    />
+                ))}
             </div>
         </div>
     );

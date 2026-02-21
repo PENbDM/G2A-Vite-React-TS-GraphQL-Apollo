@@ -1,17 +1,69 @@
 import { prisma } from '../lib/prisma'
 
 async function main() {
-    // Create a new user with a post
-    const game = await prisma.game.create({
-        data: {
-            title: "Resident evil",
-            description: "Best game ever",
+    const games = [
+        {
+            title:'Elden Ring',
             price:59.5,
-            isBestSeller:true
+            isBestSeller:true,
+            description:'Best Game',
+            imgUrl:'https://gaming-shop-img.s3.eu-north-1.amazonaws.com/gaming-shop-img/elden-ring.avif'
+        },
+        {
+            title:'Crusader Kings 3',
+            price:15.5,
+            isBestSeller:true,
+            description:'Best Game',
+            imgUrl:'https://gaming-shop-img.s3.eu-north-1.amazonaws.com/gaming-shop-img/crusaderKing3.avif'
+        },
+        {
+            title:'Fallout 4',
+            price:18,
+            isBestSeller:true,
+            description:'Best Game',
+            imgUrl:'https://gaming-shop-img.s3.eu-north-1.amazonaws.com/gaming-shop-img/fallout4.avif'
+        },
+        {
+            title:'GTA 5',
+            price:21.41,
+            isBestSeller:true,
+            description:'Best Game',
+            imgUrl:'https://gaming-shop-img.s3.eu-north-1.amazonaws.com/gaming-shop-img/gta5.avif'
+        },
+        {
+            title:'Kingdom Come: Deliverance II',
+            price:58,
+            isBestSeller:true,
+            description:'Best Game',
+            imgUrl:'https://gaming-shop-img.s3.eu-north-1.amazonaws.com/gaming-shop-img/kcd2.avif'
+        },
+        {
+            title:'Minecraft',
+            price:12,
+            isBestSeller:true,
+            description:'Best Game',
+            imgUrl:'https://gaming-shop-img.s3.eu-north-1.amazonaws.com/gaming-shop-img/minecraft.avif'
+        },
+        {
+            title:'Rust',
+            price:18,
+            isBestSeller:true,
+            description:'Best Game',
+            imgUrl:'https://gaming-shop-img.s3.eu-north-1.amazonaws.com/gaming-shop-img/rust.avif'
+        },
+        {
+            title:'WarHammer',
+            price:52,
+            isBestSeller:true,
+            description:'Best Game',
+            imgUrl:'https://gaming-shop-img.s3.eu-north-1.amazonaws.com/gaming-shop-img/warhammer.avif'
         },
 
+    ]
+    const game = await prisma.game.createMany({
+        data:games,
     });
-    console.log("Created user:", game);
+    console.log("Created game:", game);
 
     // Fetch all users with their posts
     const allGames = await prisma.game.findMany({

@@ -8,28 +8,33 @@ import {
     CardHeader,
     CardTitle,
 } from "@/components/ui/card"
+import { AspectRatio } from "@/components/ui/aspect-ratio"
 
 interface CardImageProps{
     title:string,
-    description:string
+    description:string,
+    price:number,
+    isBestSeller:boolean,
+    imgUrl:string,
 }
 
-export function GameCard({title,description}:CardImageProps) {
+export function GameCard({...props}:CardImageProps) {
+    console.log(props.imgUrl)
     return (
         <Card className="relative mx-auto w-full max-w-sm pt-0">
-            <div className="absolute inset-0 z-30 aspect-video bg-black/35" />
+            <div className="absolute inset-0 z-30 aspect-video " />
             <img
-                src="https://avatar.vercel.sh/shadcn1"
+                src={props.imgUrl}
                 alt="Event cover"
-                className="relative z-20 aspect-video w-full object-cover brightness-60 grayscale dark:brightness-40"
+                className="relative z-20 aspect-video w-full object-cover"
             />
             <CardHeader>
                 <CardAction>
                     <Badge variant="secondary">Featured</Badge>
                 </CardAction>
-                <CardTitle>{title}</CardTitle>
+                <CardTitle>{props.title}</CardTitle>
                 <CardDescription>
-                    {description}
+                    {props.description}
                 </CardDescription>
             </CardHeader>
             <CardFooter>

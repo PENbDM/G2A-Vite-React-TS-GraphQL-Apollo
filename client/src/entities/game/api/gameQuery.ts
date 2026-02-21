@@ -8,6 +8,8 @@ export const GET_GAMES = gql`
             title
             price
             isBestSeller
+            imgUrl
+            description
         }
     }
 `;

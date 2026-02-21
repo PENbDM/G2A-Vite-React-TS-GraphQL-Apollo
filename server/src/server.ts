@@ -9,6 +9,7 @@ type Game {
     description: String
     price: Float
     isBestSeller: Boolean
+    imgUrl:String 
 }
 
 type Query {
