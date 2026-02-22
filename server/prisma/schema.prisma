@@ -17,9 +17,42 @@ model Game {
   id           String   @id @default(uuid())
   title        String
   description  String?
-  price        Float
+  price        Float    // This will be your final/discounted price
+  oldPrice     Float?   // Optional: To show the crossed-out original price
+  discount     Int?     @default(0) // The percentage (e.g., 44 for -44%)
   isBestSeller Boolean  @default(false)
   imgUrl       String?
+
+  // New Fields
+  platform     Platform
+  region       Region
+  edition      Edition
+  type         GameType
+
   createdAt    DateTime @default(now())
   updatedAt    DateTime @updatedAt
+}
+
+enum Platform {
+  STEAM
+  PC
+  PS5
+  XBOX
+}
+
+enum Region {
+  GLOBAL
+  EUROPE
+  USA
+}
+
+enum Edition {
+  STANDARD
+  DELUXE
+  COLLECTION
+}
+
+enum GameType {
+  KEY
+  ACCOUNT
 }
