@@ -8,9 +8,9 @@ import {
 import type {Game} from "@/shared/types/game.ts";
 
 
-export function GameCard({onClick,...props}:Game & {onClick:(id:string) => void}) {
+export function GameCard({onClick,...props}:Game & {onClick?:(id:string) => void}) {
     return (
-        <Card onClick={()=>onClick(props.id)} className="relative mx-auto w-full max-w-sm pt-0 transition-transform duration-300 hover:scale-105 cursor-pointer rounded-2xl overflow-hidden border-none shadow-sm">            <div className="absolute inset-0 z-30 aspect-video " />
+        <Card onClick={()=>onClick?.(props.id)} className="relative mx-auto w-full max-w-sm pt-0 transition-transform duration-300 hover:scale-105 cursor-pointer rounded-2xl overflow-hidden border-none shadow-sm">            <div className="absolute inset-0 z-30 aspect-video " />
             <img
                 src={props.imgUrl}
                 alt="Event cover"

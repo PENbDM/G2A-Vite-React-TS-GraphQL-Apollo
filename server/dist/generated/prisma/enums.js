@@ -7,4 +7,23 @@
 *
 * 🟢 You can import this file directly.
 */
-export {};
+export const Platform = {
+    STEAM: 'STEAM',
+    PC: 'PC',
+    PS5: 'PS5',
+    XBOX: 'XBOX'
+};
+export const Region = {
+    GLOBAL: 'GLOBAL',
+    EUROPE: 'EUROPE',
+    USA: 'USA'
+};
+export const Edition = {
+    STANDARD: 'STANDARD',
+    DELUXE: 'DELUXE',
+    COLLECTION: 'COLLECTION'
+};
+export const GameType = {
+    KEY: 'KEY',
+    ACCOUNT: 'ACCOUNT'
+};

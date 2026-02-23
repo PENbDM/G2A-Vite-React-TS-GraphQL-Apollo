@@ -34,25 +34,25 @@ model Game {
 }
 
 enum Platform {
-  STEAM
-  PC
-  PS5
-  XBOX
+  Steam
+  Pc
+  Ps5
+  Xbox
 }
 
 enum Region {
-  GLOBAL
-  EUROPE
-  USA
+  Global
+  Europe
+  Usa
 }
 
 enum Edition {
-  STANDARD
-  DELUXE
-  COLLECTION
+  Standard
+  Deluxe
+  Collection
 }
 
 enum GameType {
-  KEY
-  ACCOUNT
+  Key
+  Account
 }

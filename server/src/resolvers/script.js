@@ -39,78 +39,122 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var prisma_1 = require("../lib/prisma");
 function main() {
     return __awaiter(this, void 0, void 0, function () {
-        var games, game, allGames;
+        var games, createdGames;
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
                     games = [
                         {
                             title: 'Elden Ring',
-                            price: 59.5,
+                            price: 19.95,
+                            oldPrice: 35.33,
+                            discount: 44,
                             isBestSeller: true,
                             description: 'Best Game',
-                            imgUrl: 'https://gaming-shop-img.s3.eu-north-1.amazonaws.com/gaming-shop-img/elden-ring.avif'
+                            imgUrl: 'https://gaming-shop-img.s3.eu-north-1.amazonaws.com/gaming-shop-img/elden-ring.avif',
+                            platform: 'Steam', // Matched to Schema
+                            region: 'Global', // Matched to Schema
+                            edition: 'Deluxe', // Matched to Schema
+                            type: 'Key' // Matched to Schema
                         },
                         {
                             title: 'Crusader Kings 3',
-                            price: 15.5,
+                            price: 31.74,
+                            oldPrice: 47.11,
+                            discount: 33,
                             isBestSeller: true,
-                            description: 'Best Game',
-                            imgUrl: 'https://gaming-shop-img.s3.eu-north-1.amazonaws.com/gaming-shop-img/crusaderKing3.avif'
+                            description: 'Grand Strategy Game',
+                            imgUrl: 'https://gaming-shop-img.s3.eu-north-1.amazonaws.com/gaming-shop-img/crusaderKing3.avif',
+                            platform: 'Pc',
+                            region: 'Europe',
+                            edition: 'Standard',
+                            type: 'Key'
                         },
                         {
                             title: 'Fallout 4',
-                            price: 18,
+                            price: 12.42,
+                            oldPrice: 47.11,
+                            discount: 74,
                             isBestSeller: true,
-                            description: 'Best Game',
-                            imgUrl: 'https://gaming-shop-img.s3.eu-north-1.amazonaws.com/gaming-shop-img/fallout4.avif'
+                            description: 'Post-apocalyptic RPG',
+                            imgUrl: 'https://gaming-shop-img.s3.eu-north-1.amazonaws.com/gaming-shop-img/fallout4.avif',
+                            platform: 'Xbox',
+                            region: 'Usa',
+                            edition: 'Collection',
+                            type: 'Account'
                         },
                         {
                             title: 'GTA 5',
-                            price: 21.41,
+                            price: 14.12,
+                            oldPrice: 35.33,
+                            discount: 60,
                             isBestSeller: true,
-                            description: 'Best Game',
-                            imgUrl: 'https://gaming-shop-img.s3.eu-north-1.amazonaws.com/gaming-shop-img/gta5.avif'
+                            description: 'Open world action',
+                            imgUrl: 'https://gaming-shop-img.s3.eu-north-1.amazonaws.com/gaming-shop-img/gta5.avif',
+                            platform: 'Ps5',
+                            region: 'Global',
+                            edition: 'Standard',
+                            type: 'Account'
                         },
                         {
                             title: 'Kingdom Come: Deliverance II',
-                            price: 58,
+                            price: 41.08,
+                            oldPrice: 82.46,
+                            discount: 50,
                             isBestSeller: true,
-                            description: 'Best Game',
-                            imgUrl: 'https://gaming-shop-img.s3.eu-north-1.amazonaws.com/gaming-shop-img/kcd2.avif'
+                            description: 'Realistic Medieval RPG',
+                            imgUrl: 'https://gaming-shop-img.s3.eu-north-1.amazonaws.com/gaming-shop-img/kcd2.avif',
+                            platform: 'Steam',
+                            region: 'Global',
+                            edition: 'Deluxe',
+                            type: 'Key'
                         },
                         {
                             title: 'Minecraft',
-                            price: 12,
+                            price: 10.96,
+                            oldPrice: 35.33,
+                            discount: 69,
                             isBestSeller: true,
-                            description: 'Best Game',
-                            imgUrl: 'https://gaming-shop-img.s3.eu-north-1.amazonaws.com/gaming-shop-img/minecraft.avif'
+                            description: 'Sandbox Building',
+                            imgUrl: 'https://gaming-shop-img.s3.eu-north-1.amazonaws.com/gaming-shop-img/minecraft.avif',
+                            platform: 'Pc',
+                            region: 'Global',
+                            edition: 'Standard',
+                            type: 'Key'
                         },
                         {
                             title: 'Rust',
-                            price: 18,
+                            price: 9.84,
+                            oldPrice: 47.11,
+                            discount: 79,
                             isBestSeller: true,
-                            description: 'Best Game',
-                            imgUrl: 'https://gaming-shop-img.s3.eu-north-1.amazonaws.com/gaming-shop-img/rust.avif'
+                            description: 'Survival Multiplayer',
+                            imgUrl: 'https://gaming-shop-img.s3.eu-north-1.amazonaws.com/gaming-shop-img/rust.avif',
+                            platform: 'Steam',
+                            region: 'Europe',
+                            edition: 'Standard',
+                            type: 'Key'
                         },
                         {
                             title: 'WarHammer',
-                            price: 52,
+                            price: 27.69,
+                            oldPrice: 70.68,
+                            discount: 61,
                             isBestSeller: true,
-                            description: 'Best Game',
-                            imgUrl: 'https://gaming-shop-img.s3.eu-north-1.amazonaws.com/gaming-shop-img/warhammer.avif'
+                            description: 'Fantasy Warfare',
+                            imgUrl: 'https://gaming-shop-img.s3.eu-north-1.amazonaws.com/gaming-shop-img/warhammer.avif',
+                            platform: 'Pc',
+                            region: 'Usa',
+                            edition: 'Collection',
+                            type: 'Key'
                         },
                     ];
                     return [4 /*yield*/, prisma_1.prisma.game.createMany({
                             data: games,
                         })];
                 case 1:
-                    game = _a.sent();
-                    console.log("Created game:", game);
-                    return [4 /*yield*/, prisma_1.prisma.game.findMany({})];
-                case 2:
-                    allGames = _a.sent();
-                    console.log("All users:", JSON.stringify(allGames, null, 2));
+                    createdGames = _a.sent();
+                    console.log("Successfully created ".concat(createdGames.count, " games."));
                     return [2 /*return*/];
             }
         });

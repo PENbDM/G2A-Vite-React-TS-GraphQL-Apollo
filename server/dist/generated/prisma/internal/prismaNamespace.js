@@ -83,7 +83,14 @@ export const GameScalarFieldEnum = {
     title: 'title',
     description: 'description',
     price: 'price',
+    oldPrice: 'oldPrice',
+    discount: 'discount',
     isBestSeller: 'isBestSeller',
+    imgUrl: 'imgUrl',
+    platform: 'platform',
+    region: 'region',
+    edition: 'edition',
+    type: 'type',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt'
 };

@@ -7,17 +7,31 @@ type Game {
     title: String
     description: String
     price: Float
+    oldPrice: Float
+    discount: Int
     isBestSeller: Boolean
+    imgUrl:String
+    edition:String
+    platform: String
+    region: String
+    type: String
 }
 
 type Query {
-allGames: [Game]}
+allGames: [Game]
+game(id: String!): Game
+}
 `;
 const resolvers = {
     Query: {
         allGames: () => {
             return prisma.game.findMany();
         },
+        getGame: (_parent, args) => {
+            return prisma.game.findUnique({
+                where: { id: args.id },
+            });
+        }
     },
 };
 const server = new ApolloServer({

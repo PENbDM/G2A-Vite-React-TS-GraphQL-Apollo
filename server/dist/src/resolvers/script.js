@@ -1,18 +1,117 @@
 import { prisma } from '../lib/prisma';
 async function main() {
-    // Create a new user with a post
-    const game = await prisma.game.create({
-        data: {
-            title: "Resident evil",
-            description: "Best game ever",
-            price: 59.5,
-            isBestSeller: true
+    const games = [
+        {
+            title: 'Elden Ring',
+            price: 19.95,
+            oldPrice: 35.33,
+            discount: 44,
+            isBestSeller: true,
+            description: 'Best Game',
+            imgUrl: 'https://gaming-shop-img.s3.eu-north-1.amazonaws.com/gaming-shop-img/elden-ring.avif',
+            platform: 'STEAM',
+            region: 'GLOBAL',
+            edition: 'DELUXE',
+            type: 'KEY'
         },
+        {
+            title: 'Crusader Kings 3',
+            price: 31.74,
+            oldPrice: 47.11,
+            discount: 33,
+            isBestSeller: true,
+            description: 'Grand Strategy Game',
+            imgUrl: 'https://gaming-shop-img.s3.eu-north-1.amazonaws.com/gaming-shop-img/crusaderKing3.avif',
+            platform: 'PC',
+            region: 'EUROPE',
+            edition: 'STANDARD',
+            type: 'KEY'
+        },
+        {
+            title: 'Fallout 4',
+            price: 12.42,
+            oldPrice: 47.11,
+            discount: 74,
+            isBestSeller: true,
+            description: 'Post-apocalyptic RPG',
+            imgUrl: 'https://gaming-shop-img.s3.eu-north-1.amazonaws.com/gaming-shop-img/fallout4.avif',
+            platform: 'XBOX',
+            region: 'USA',
+            edition: 'COLLECTION',
+            type: 'ACCOUNT'
+        },
+        {
+            title: 'GTA 5',
+            price: 14.12,
+            oldPrice: 35.33,
+            discount: 60,
+            isBestSeller: true,
+            description: 'Open world action',
+            imgUrl: 'https://gaming-shop-img.s3.eu-north-1.amazonaws.com/gaming-shop-img/gta5.avif',
+            platform: 'PS5',
+            region: 'GLOBAL',
+            edition: 'STANDARD',
+            type: 'ACCOUNT'
+        },
+        {
+            title: 'Kingdom Come: Deliverance II',
+            price: 41.08,
+            oldPrice: 82.46,
+            discount: 50,
+            isBestSeller: true,
+            description: 'Realistic Medieval RPG',
+            imgUrl: 'https://gaming-shop-img.s3.eu-north-1.amazonaws.com/gaming-shop-img/kcd2.avif',
+            platform: 'STEAM',
+            region: 'GLOBAL',
+            edition: 'DELUXE',
+            type: 'KEY'
+        },
+        {
+            title: 'Minecraft',
+            price: 10.96,
+            oldPrice: 35.33,
+            discount: 69,
+            isBestSeller: true,
+            description: 'Sandbox Building',
+            imgUrl: 'https://gaming-shop-img.s3.eu-north-1.amazonaws.com/gaming-shop-img/minecraft.avif',
+            platform: 'PC',
+            region: 'GLOBAL',
+            edition: 'STANDARD',
+            type: 'KEY'
+        },
+        {
+            title: 'Rust',
+            price: 9.84,
+            oldPrice: 47.11,
+            discount: 79,
+            isBestSeller: true,
+            description: 'Survival Multiplayer',
+            imgUrl: 'https://gaming-shop-img.s3.eu-north-1.amazonaws.com/gaming-shop-img/rust.avif',
+            platform: 'STEAM',
+            region: 'EUROPE',
+            edition: 'STANDARD',
+            type: 'KEY'
+        },
+        {
+            title: 'WarHammer',
+            price: 27.69,
+            oldPrice: 70.68,
+            discount: 61,
+            isBestSeller: true,
+            description: 'Fantasy Warfare',
+            imgUrl: 'https://gaming-shop-img.s3.eu-north-1.amazonaws.com/gaming-shop-img/warhammer.avif',
+            platform: 'PC',
+            region: 'USA',
+            edition: 'COLLECTION',
+            type: 'KEY'
+        },
+    ];
+    // Clear existing data to avoid duplicates when re-seeding
+    await prisma.game.deleteMany({});
+    const createdGames = await prisma.game.createMany({
+        data: games,
     });
-    console.log("Created user:", game);
-    // Fetch all users with their posts
-    const allGames = await prisma.game.findMany({});
-    console.log("All users:", JSON.stringify(allGames, null, 2));
+    console.log(`Successfully created ${createdGames.count} games.`);
 }
 main()
     .then(async () => {

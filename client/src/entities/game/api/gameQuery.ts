@@ -21,15 +21,20 @@ export const GET_GAMES = gql`
 `;
 
 export const GET_GAME_BY_ID = gql`
-    query GetGame($id: String!) {
-        game(id: $id) {
+    query GetGameById($id: String!) {
+        getGame(id: $id) {
             id
             title
-            description
             price
+            oldPrice
+            discount
+            isBestSeller
             imgUrl
+            description
+            edition
             platform
             region
+            type
         }
     }
 `;

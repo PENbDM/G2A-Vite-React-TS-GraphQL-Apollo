@@ -17,3 +17,7 @@ export interface Game {
 export interface GamesData {
     allGames: Game[];
 }
+// In your types file
+export interface GameData {
+    getGame: Game; // Matches the JSON key "getGame"
+}

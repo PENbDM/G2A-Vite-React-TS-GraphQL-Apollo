@@ -20,7 +20,7 @@ type Game {
 
 type Query {
 allGames: [Game]
-game(id: String!): Game
+getGame(id: String!): Game
 }
 `
 const resolvers = {
@@ -29,6 +29,8 @@ const resolvers = {
             return  prisma.game.findMany();
         },
         getGame: (_parent, args) => {
+            console.log(args);
+            console.log('dasda')
             return prisma.game.findUnique({
                 where:{id:args.id},
             });

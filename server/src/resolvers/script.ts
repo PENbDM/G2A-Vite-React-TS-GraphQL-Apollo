@@ -10,10 +10,10 @@ async function main() {
             isBestSeller: true,
             description: 'Best Game',
             imgUrl: 'https://gaming-shop-img.s3.eu-north-1.amazonaws.com/gaming-shop-img/elden-ring.avif',
-            platform: 'STEAM',
-            region: 'GLOBAL',
-            edition: 'DELUXE',
-            type: 'KEY'
+            platform: 'Steam',    // Matched to Schema
+            region: 'Global',     // Matched to Schema
+            edition: 'Deluxe',    // Matched to Schema
+            type: 'Key'           // Matched to Schema
         },
         {
             title: 'Crusader Kings 3',
@@ -23,10 +23,10 @@ async function main() {
             isBestSeller: true,
             description: 'Grand Strategy Game',
             imgUrl: 'https://gaming-shop-img.s3.eu-north-1.amazonaws.com/gaming-shop-img/crusaderKing3.avif',
-            platform: 'PC',
-            region: 'EUROPE',
-            edition: 'STANDARD',
-            type: 'KEY'
+            platform: 'Pc',
+            region: 'Europe',
+            edition: 'Standard',
+            type: 'Key'
         },
         {
             title: 'Fallout 4',
@@ -36,10 +36,10 @@ async function main() {
             isBestSeller: true,
             description: 'Post-apocalyptic RPG',
             imgUrl: 'https://gaming-shop-img.s3.eu-north-1.amazonaws.com/gaming-shop-img/fallout4.avif',
-            platform: 'XBOX',
-            region: 'USA',
-            edition: 'COLLECTION',
-            type: 'ACCOUNT'
+            platform: 'Xbox',
+            region: 'Usa',
+            edition: 'Collection',
+            type: 'Account'
         },
         {
             title: 'GTA 5',
@@ -49,10 +49,10 @@ async function main() {
             isBestSeller: true,
             description: 'Open world action',
             imgUrl: 'https://gaming-shop-img.s3.eu-north-1.amazonaws.com/gaming-shop-img/gta5.avif',
-            platform: 'PS5',
-            region: 'GLOBAL',
-            edition: 'STANDARD',
-            type: 'ACCOUNT'
+            platform: 'Ps5',
+            region: 'Global',
+            edition: 'Standard',
+            type: 'Account'
         },
         {
             title: 'Kingdom Come: Deliverance II',
@@ -62,10 +62,10 @@ async function main() {
             isBestSeller: true,
             description: 'Realistic Medieval RPG',
             imgUrl: 'https://gaming-shop-img.s3.eu-north-1.amazonaws.com/gaming-shop-img/kcd2.avif',
-            platform: 'STEAM',
-            region: 'GLOBAL',
-            edition: 'DELUXE',
-            type: 'KEY'
+            platform: 'Steam',
+            region: 'Global',
+            edition: 'Deluxe',
+            type: 'Key'
         },
         {
             title: 'Minecraft',
@@ -75,10 +75,10 @@ async function main() {
             isBestSeller: true,
             description: 'Sandbox Building',
             imgUrl: 'https://gaming-shop-img.s3.eu-north-1.amazonaws.com/gaming-shop-img/minecraft.avif',
-            platform: 'PC',
-            region: 'GLOBAL',
-            edition: 'STANDARD',
-            type: 'KEY'
+            platform: 'Pc',
+            region: 'Global',
+            edition: 'Standard',
+            type: 'Key'
         },
         {
             title: 'Rust',
@@ -88,10 +88,10 @@ async function main() {
             isBestSeller: true,
             description: 'Survival Multiplayer',
             imgUrl: 'https://gaming-shop-img.s3.eu-north-1.amazonaws.com/gaming-shop-img/rust.avif',
-            platform: 'STEAM',
-            region: 'EUROPE',
-            edition: 'STANDARD',
-            type: 'KEY'
+            platform: 'Steam',
+            region: 'Europe',
+            edition: 'Standard',
+            type: 'Key'
         },
         {
             title: 'WarHammer',
@@ -101,15 +101,12 @@ async function main() {
             isBestSeller: true,
             description: 'Fantasy Warfare',
             imgUrl: 'https://gaming-shop-img.s3.eu-north-1.amazonaws.com/gaming-shop-img/warhammer.avif',
-            platform: 'PC',
-            region: 'USA',
-            edition: 'COLLECTION',
-            type: 'KEY'
+            platform: 'Pc',
+            region: 'Usa',
+            edition: 'Collection',
+            type: 'Key'
         },
     ]
-
-    // Clear existing data to avoid duplicates when re-seeding
-    await prisma.game.deleteMany({});
 
     const createdGames = await prisma.game.createMany({
         data: games,
