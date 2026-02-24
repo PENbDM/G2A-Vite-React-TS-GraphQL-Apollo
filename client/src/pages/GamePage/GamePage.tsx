@@ -1,4 +1,3 @@
-import React from 'react';
 import { useParams } from 'react-router'; // 1. Import useParams
 import {GET_GAME_BY_ID} from '../../entities/game/api/gameQuery.ts'
 import { useQuery } from "@apollo/client/react";

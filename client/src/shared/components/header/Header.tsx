@@ -1,13 +1,15 @@
 import { Input } from "@/components/ui/input"
+import { Link } from "react-router";
 
 function Header() {
     return (
         <div className="bg-black w-full h-20 grid place-items-center">
             <div className="grid grid-flow-col items-center justify-between w-[1168px] h-[48px]">
-                <img src="https://www.g2a.com/static/assets/images/logo_g2a_white.svg"
-                     width={105}
-                     height={30}
-                />
+                <Link to='/'><img src="https://www.g2a.com/static/assets/images/logo_g2a_white.svg"
+                           width={105}
+                           height={30}
+                           alt='logo'
+                /></Link>
 
                 <Input className="w-[534px] " />
                 <div className='w-[155px] h-[48px] grid place-items-center grid-flow-col'>

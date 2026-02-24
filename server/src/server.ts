@@ -1,42 +1,9 @@
 import { ApolloServer } from '@apollo/server';
 import { startStandaloneServer } from '@apollo/server/standalone';
-import {prisma} from './lib/prisma'
+import typeDefs from './typeDefs'
+import resolvers from "./resolvers";
 
-const typeDefs = `
-type Game {
-    id: String
-    title: String
-    description: String
-    price: Float
-    oldPrice: Float
-    discount: Int
-    isBestSeller: Boolean
-    imgUrl:String
-    edition:String
-    platform: String
-    region: String
-    type: String
-}
 
-type Query {
-allGames: [Game]
-getGame(id: String!): Game
-}
-`
-const resolvers = {
-    Query: {
-        allGames: () => {
-            return  prisma.game.findMany();
-        },
-        getGame: (_parent, args) => {
-            console.log(args);
-            console.log('dasda')
-            return prisma.game.findUnique({
-                where:{id:args.id},
-            });
-        }
-    },
-};
 const server = new ApolloServer({
     typeDefs,
     resolvers,

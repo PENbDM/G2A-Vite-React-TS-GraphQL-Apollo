@@ -1,4 +1,5 @@
-import { prisma } from '../lib/prisma'
+// server/src/script.ts
+import { prisma } from './lib/prisma';
 
 async function main() {
     const games = [
@@ -107,18 +108,16 @@ async function main() {
             type: 'Key'
         },
     ]
-
     const createdGames = await prisma.game.createMany({
         data: games,
+        skipDuplicates: true, // Prevents errors if you run it twice
     });
 
     console.log(`Successfully created ${createdGames.count} games.`);
 }
 
 main()
-    .then(async () => {
-        await prisma.$disconnect();
-    })
+    .then(async () => await prisma.$disconnect())
     .catch(async (e) => {
         console.error(e);
         await prisma.$disconnect();

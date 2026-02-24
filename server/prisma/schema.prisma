@@ -33,6 +33,14 @@ model Game {
   updatedAt    DateTime @updatedAt
 }
 
+model User {
+  id           String   @id @default(uuid())
+  email        String   @unique
+  password     String
+  refreshToken String?  // Add this field
+  createdAt    DateTime @default(now())
+}
+
 enum Platform {
   Steam
   Pc

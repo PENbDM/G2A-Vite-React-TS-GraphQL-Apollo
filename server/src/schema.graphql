@@ -1,0 +1,19 @@
+type Game {
+    id: String
+    title: String
+    description: String
+    price: Float
+    oldPrice: Float
+    discount: Int
+    isBestSeller: Boolean
+    imgUrl:String
+    edition:String
+    platform: String
+    region: String
+    type: String
+}
+
+type Query {
+    allGames: [Game]
+    getGame(id: String!): Game
+}

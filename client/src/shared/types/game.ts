@@ -21,3 +21,4 @@ export interface GamesData {
 export interface GameData {
     getGame: Game; // Matches the JSON key "getGame"
 }
+
