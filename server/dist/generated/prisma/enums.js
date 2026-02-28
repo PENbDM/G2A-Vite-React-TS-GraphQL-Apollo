@@ -8,22 +8,22 @@
 * 🟢 You can import this file directly.
 */
 export const Platform = {
-    STEAM: 'STEAM',
-    PC: 'PC',
-    PS5: 'PS5',
-    XBOX: 'XBOX'
+    Steam: 'Steam',
+    Pc: 'Pc',
+    Ps5: 'Ps5',
+    Xbox: 'Xbox'
 };
 export const Region = {
-    GLOBAL: 'GLOBAL',
-    EUROPE: 'EUROPE',
-    USA: 'USA'
+    Global: 'Global',
+    Europe: 'Europe',
+    Usa: 'Usa'
 };
 export const Edition = {
-    STANDARD: 'STANDARD',
-    DELUXE: 'DELUXE',
-    COLLECTION: 'COLLECTION'
+    Standard: 'Standard',
+    Deluxe: 'Deluxe',
+    Collection: 'Collection'
 };
 export const GameType = {
-    KEY: 'KEY',
-    ACCOUNT: 'ACCOUNT'
+    Key: 'Key',
+    Account: 'Account'
 };

@@ -21,7 +21,7 @@ export const GET_GAMES = gql`
 `;
 
 export const GET_GAME_BY_ID = gql`
-    query GetGameById($id: String!) {
+    query GetGameById($id: ID!) {
         getGame(id: $id) {
             id
             title

@@ -12,9 +12,7 @@ function Home() {
         // This dynamically sends the user to the specific game route
         navigate(`/games/${id}`);
     };
-    // const handleIdLog = (id: string) => {
-    //     console.log("Clicked Game ID:", id);
-    // };
+
     const {loading,error,data} = useQuery<GamesData>(GET_GAMES);
     if(loading) return  <p>Loading...</p>
     if(error) return  <p>Error...</p>

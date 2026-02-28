@@ -67,7 +67,8 @@ export const JsonNull = runtime.JsonNull;
  */
 export const AnyNull = runtime.AnyNull;
 export const ModelName = {
-    Game: 'Game'
+    Game: 'Game',
+    User: 'User'
 };
 /**
  * Enums
@@ -93,6 +94,12 @@ export const GameScalarFieldEnum = {
     type: 'type',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt'
+};
+export const UserScalarFieldEnum = {
+    id: 'id',
+    email: 'email',
+    password: 'password',
+    createdAt: 'createdAt'
 };
 export const SortOrder = {
     asc: 'asc',

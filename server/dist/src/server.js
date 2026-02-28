@@ -1,44 +1,21 @@
 import { ApolloServer } from '@apollo/server';
 import { startStandaloneServer } from '@apollo/server/standalone';
-import { prisma } from './lib/prisma';
-const typeDefs = `
-type Game {
-    id: String
-    title: String
-    description: String
-    price: Float
-    oldPrice: Float
-    discount: Int
-    isBestSeller: Boolean
-    imgUrl:String
-    edition:String
-    platform: String
-    region: String
-    type: String
-}
-
-type Query {
-allGames: [Game]
-game(id: String!): Game
-}
-`;
-const resolvers = {
-    Query: {
-        allGames: () => {
-            return prisma.game.findMany();
-        },
-        getGame: (_parent, args) => {
-            return prisma.game.findUnique({
-                where: { id: args.id },
-            });
-        }
-    },
-};
+import typeDefs from './typeDefs.js';
+import resolvers from './resolvers/index.js';
+import { authenticateUser } from "./lib/auth.js";
 const server = new ApolloServer({
     typeDefs,
     resolvers,
 });
 const { url } = await startStandaloneServer(server, {
+    context: async ({ req }) => {
+        // Use your separated logic here
+        const user = await authenticateUser(req);
+        // Return the context object used by all resolvers
+        return {
+            user,
+        };
+    },
     listen: { port: 5000 },
 });
-console.log(`🚀  Server ready at: ${url}`);
+console.log(`🚀 Server ready at: ${url}`);

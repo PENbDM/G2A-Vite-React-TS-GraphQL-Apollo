@@ -1,5 +1,6 @@
 // server/src/script.ts
 import { prisma } from './lib/prisma';
+import {Platform,Region,Edition,GameType} from "../generated/prisma/enums";
 
 async function main() {
     const games = [
@@ -11,10 +12,10 @@ async function main() {
             isBestSeller: true,
             description: 'Best Game',
             imgUrl: 'https://gaming-shop-img.s3.eu-north-1.amazonaws.com/gaming-shop-img/elden-ring.avif',
-            platform: 'Steam',    // Matched to Schema
-            region: 'Global',     // Matched to Schema
-            edition: 'Deluxe',    // Matched to Schema
-            type: 'Key'           // Matched to Schema
+            platform: Platform.Steam,
+            region: Region.Global,
+            edition: Edition.Deluxe,
+            type: GameType.Key
         },
         {
             title: 'Crusader Kings 3',
@@ -24,10 +25,10 @@ async function main() {
             isBestSeller: true,
             description: 'Grand Strategy Game',
             imgUrl: 'https://gaming-shop-img.s3.eu-north-1.amazonaws.com/gaming-shop-img/crusaderKing3.avif',
-            platform: 'Pc',
-            region: 'Europe',
-            edition: 'Standard',
-            type: 'Key'
+            platform: Platform.Pc,
+            region: Region.Europe,
+            edition: Edition.Standard,
+            type: GameType.Key
         },
         {
             title: 'Fallout 4',
@@ -37,10 +38,10 @@ async function main() {
             isBestSeller: true,
             description: 'Post-apocalyptic RPG',
             imgUrl: 'https://gaming-shop-img.s3.eu-north-1.amazonaws.com/gaming-shop-img/fallout4.avif',
-            platform: 'Xbox',
-            region: 'Usa',
-            edition: 'Collection',
-            type: 'Account'
+            platform: Platform.Xbox,
+            region: Region.Usa,
+            edition: Edition.Collection,
+            type: GameType.Account
         },
         {
             title: 'GTA 5',
@@ -50,10 +51,10 @@ async function main() {
             isBestSeller: true,
             description: 'Open world action',
             imgUrl: 'https://gaming-shop-img.s3.eu-north-1.amazonaws.com/gaming-shop-img/gta5.avif',
-            platform: 'Ps5',
-            region: 'Global',
-            edition: 'Standard',
-            type: 'Account'
+            platform: Platform.Ps5,
+            region: Region.Global,
+            edition: Edition.Standard,
+            type: GameType.Account
         },
         {
             title: 'Kingdom Come: Deliverance II',
@@ -63,10 +64,10 @@ async function main() {
             isBestSeller: true,
             description: 'Realistic Medieval RPG',
             imgUrl: 'https://gaming-shop-img.s3.eu-north-1.amazonaws.com/gaming-shop-img/kcd2.avif',
-            platform: 'Steam',
-            region: 'Global',
-            edition: 'Deluxe',
-            type: 'Key'
+            platform: Platform.Steam,
+            region: Region.Global,
+            edition: Edition.Deluxe,
+            type: GameType.Key
         },
         {
             title: 'Minecraft',
@@ -76,10 +77,10 @@ async function main() {
             isBestSeller: true,
             description: 'Sandbox Building',
             imgUrl: 'https://gaming-shop-img.s3.eu-north-1.amazonaws.com/gaming-shop-img/minecraft.avif',
-            platform: 'Pc',
-            region: 'Global',
-            edition: 'Standard',
-            type: 'Key'
+            platform: Platform.Pc,
+            region: Region.Global,
+            edition: Edition.Standard,
+            type: GameType.Key
         },
         {
             title: 'Rust',
@@ -89,10 +90,10 @@ async function main() {
             isBestSeller: true,
             description: 'Survival Multiplayer',
             imgUrl: 'https://gaming-shop-img.s3.eu-north-1.amazonaws.com/gaming-shop-img/rust.avif',
-            platform: 'Steam',
-            region: 'Europe',
-            edition: 'Standard',
-            type: 'Key'
+            platform: Platform.Steam,
+            region: Region.Europe,
+            edition: Edition.Standard,
+            type: GameType.Key
         },
         {
             title: 'WarHammer',
@@ -102,15 +103,15 @@ async function main() {
             isBestSeller: true,
             description: 'Fantasy Warfare',
             imgUrl: 'https://gaming-shop-img.s3.eu-north-1.amazonaws.com/gaming-shop-img/warhammer.avif',
-            platform: 'Pc',
-            region: 'Usa',
-            edition: 'Collection',
-            type: 'Key'
+            platform: Platform.Pc,
+            region: Region.Usa,
+            edition: Edition.Collection,
+            type: GameType.Key
         },
-    ]
+    ];
+
     const createdGames = await prisma.game.createMany({
         data: games,
-        skipDuplicates: true, // Prevents errors if you run it twice
     });
 
     console.log(`Successfully created ${createdGames.count} games.`);

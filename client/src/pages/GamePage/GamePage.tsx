@@ -5,7 +5,7 @@ import type {GameData} from "@/shared/types/game.ts";
 import SingleGameCard from "@/entities/game/ui/SingleGameCard.tsx";
 function GamePage() {
     const { id } = useParams<{ id: string }>();
-
+    console.log(id)
     // Pass GameData as the generic to useQuery
     const { loading, error, data } = useQuery<GameData>(GET_GAME_BY_ID, {
         variables: { id }
