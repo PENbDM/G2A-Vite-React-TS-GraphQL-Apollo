@@ -27,7 +27,7 @@ const SingleGameCard = (props: Game) => {
                 <p className='mt-1'><span className='font-bold text-[20px]'>Edition:</span> {props.edition}</p>
             </div>
                 <div className='ml-10'>
-                    <CartSmall price={props.price}  />
+                    <CartSmall {...props} />
                 </div>
             </div>
 

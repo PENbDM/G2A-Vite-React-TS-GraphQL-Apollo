@@ -1,4 +1,4 @@
-import React from "react";
+import React from "react"; // ✅ Correct
 import { Link } from "react-router"
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -21,6 +21,8 @@ export function FormComponent({ mode }: FormComponentProps) {
 
     const [reg] = useMutation<RegisterResponse,AuthCredentials>(REGISTER_USER);
     const [log] = useMutation<LoginResponse,AuthCredentials>(LOGIN_USER);
+    const [error, setError] = React.useState('')
+    console.log(error)
 
     const {
         register,
@@ -71,8 +73,9 @@ export function FormComponent({ mode }: FormComponentProps) {
                 // TypeScript now knows 'response.data.login' exists
                 console.log('Login successful:', response.data?.login);
             }
-        } catch (err) {
-            console.error('Mutation failed:', err);
+        } catch (error:any) {
+            console.log('error here:',error?.message );
+            setError(error?.message);
         }
     };
 
@@ -145,6 +148,9 @@ export function FormComponent({ mode }: FormComponentProps) {
                     >
                         {isSubmitting ? 'Loading...' : (isRegister ? 'Create account' : 'Sign In')}
                     </Button>
+                    <div className='mt-2'>
+                        <p className='text-red-600'>{error}</p>
+                    </div>
                 </div>
 
                 {/* Divider */}
