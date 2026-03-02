@@ -1,12 +1,13 @@
-import React, { useRef, useEffect, useState } from "react";
+import { useRef, useEffect, useState } from "react";
 import { Link } from "react-router";
 import { Input } from "@/components/ui/input";
 import { useAuthStore } from "@/entities/user/model/auth-store.ts";
+import {useCartStore} from "@/entities/cart/cart-store.ts";
 
 function Header() {
     const { user, isAuthenticated, logout } = useAuthStore();
     const [isModalOpen, setModalOpen] = useState(false);
-
+    const cartStore = useCartStore((state)=>state.products);
     // Ref to track the modal container for "click outside" logic
     const modalRef = useRef<HTMLDivElement>(null);
 
@@ -32,7 +33,7 @@ function Header() {
 
     return (
         <div className="bg-black w-full h-20 grid place-items-center">
-            <div className="flex items-center justify-between w-[1168px] h-[48px]">
+            <div className="flex items-center justify-between w-292 h-12">
                 {/* Logo */}
                 <Link to='/'>
                     <img
@@ -44,12 +45,12 @@ function Header() {
                 </Link>
 
                 {/* Search Bar */}
-                <Input className="w-[534px] bg-white text-black" placeholder="Search for games..." />
+                <Input className="w-133.5 bg-white text-black" placeholder="Search for games..." />
 
                 {/* User Section */}
                 <div className='relative' ref={modalRef}>
                     <div className='flex items-center gap-3 pr-10 cursor-pointer' onClick={toggleModal}>
-                        <div className='bg-neutral-800 w-[48px] h-[48px] grid place-items-center rounded-3xl hover:bg-neutral-700 transition-colors'>
+                        <div className='bg-neutral-800 w-12 h-12 grid place-items-center rounded-3xl hover:bg-neutral-700 transition-colors'>
                             <img src="/icons/user.svg" alt="user" />
                         </div>
                         <div className='select-none'>
@@ -64,7 +65,7 @@ function Header() {
 
                     {/* Modal Dropdown */}
                     {isModalOpen && (
-                        <div className="absolute top-[60px] right-8 w-[220px] bg-white rounded-md shadow-2xl z-50 flex flex-col py-2 border border-neutral-200 animate-in fade-in zoom-in duration-150">
+                        <div className="absolute top-15 right-8 w-55 bg-white rounded-md shadow-2xl z-50 flex flex-col py-2 border border-neutral-200 animate-in fade-in zoom-in duration-150">
                             {!isAuthenticated ? (
                                 <>
                                     <div className="px-4 py-2 border-b border-neutral-100 mb-2">
@@ -94,15 +95,25 @@ function Header() {
                 </div>
 
                 {/* Right Side Icons */}
-                <div className='flex gap-[10px]'>
-                    <div className='bg-neutral-800 w-[48px] h-[48px] grid place-items-center rounded-3xl cursor-pointer hover:bg-neutral-700'>
+                <div className='flex gap-2.5'>
+                    <div className='bg-neutral-800 w-12 h-12 grid place-items-center rounded-3xl cursor-pointer hover:bg-neutral-700'>
                         <img src="/icons/whishlist.svg" alt="whishlist" />
                     </div>
-                    <Link to='/cart'>
-                        <div className='bg-neutral-800 w-[48px] h-[48px] grid place-items-center rounded-3xl hover:bg-neutral-700'>
-                            <img src="/icons/cart.svg" alt="cart" />
-                        </div>
-                    </Link>
+                    {cartStore.length ===0 ?(
+                        <Link to='/cart'>
+                            <div className='bg-neutral-800 relative w-12 h-12 grid place-items-center   rounded-3xl hover:bg-neutral-700'>
+                                <img src="/icons/cart.svg" alt="cart" />
+                            </div>
+                        </Link>
+                    ):(
+                        <Link to='/cart'>
+                            <div className='bg-neutral-800 relative w-12 h-12 grid place-items-center   rounded-3xl hover:bg-neutral-700'>
+                                <img src="/icons/cart.svg" alt="cart" />
+                                <div className='flex items-center justify-center h-5 w-5 absolute right-0 top-0 translate-x-1 -translate-y-1  bg-[#0868F3] rounded-full text-white'><span className='text-sm'>{cartStore.length}</span></div>
+                            </div>
+                        </Link>
+                    )}
+
                 </div>
             </div>
         </div>

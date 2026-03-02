@@ -1,5 +1,5 @@
 import type { CartSmallType} from "@/shared/types/cart.ts";
-import {useCartStore} from '../../../entities/cart/cart-store.ts'
+import {useCartStore} from '@/entities/cart/cart-store.ts'
 import {useAuthStore} from "@/entities/user/model/auth-store.ts";
 import AuthModal from "@/shared/components/modal/AuthModal.tsx";
 import React from 'react'
@@ -23,7 +23,7 @@ function CartSmall({ ...props }: CartSmallType) {
         if(!isAuthenticated){
             setModalOpen(true);        }
     }
-    console.log(props)
+
     return (
         <>
         <div className='w-75.5  rounded-sm border border-solid border-neutral-300 p-4'>

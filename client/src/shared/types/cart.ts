@@ -1,7 +1,7 @@
 export interface CartSmallType {
     id:string;
     amount: number;
-    name: string;
+    title: string;
     price: number;
     imgUrl: string;
 }
