@@ -68,7 +68,9 @@ export const JsonNull = runtime.JsonNull;
 export const AnyNull = runtime.AnyNull;
 export const ModelName = {
     Game: 'Game',
-    User: 'User'
+    User: 'User',
+    Order: 'Order',
+    OrderItem: 'OrderItem'
 };
 /**
  * Enums
@@ -100,6 +102,20 @@ export const UserScalarFieldEnum = {
     email: 'email',
     password: 'password',
     createdAt: 'createdAt'
+};
+export const OrderScalarFieldEnum = {
+    id: 'id',
+    userId: 'userId',
+    total: 'total',
+    status: 'status',
+    createdAt: 'createdAt'
+};
+export const OrderItemScalarFieldEnum = {
+    id: 'id',
+    orderId: 'orderId',
+    gameId: 'gameId',
+    price: 'price',
+    amount: 'amount'
 };
 export const SortOrder = {
     asc: 'asc',

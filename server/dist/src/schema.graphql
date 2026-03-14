@@ -37,3 +37,41 @@ type User {
     id: ID!
     email: String!
 }
+
+enum OrderStatus {
+    PENDING
+    PAID
+    SHIPPED
+    COMPLETED
+    CANCELLED
+}
+
+type Order {
+    id: ID!
+    userId: String!
+    total: Float!
+    status: OrderStatus!
+    createdAt: String!
+    items: [OrderItem!]!
+}
+
+type OrderItem {
+    id: ID!
+    amount: Int!
+    price: Float!
+    game: Game!
+}
+
+input OrderItemInput {
+    gameId: String!
+    amount: Int!
+    price: Float!
+}
+
+type Query {
+    getOrdersByUserId(userId: String!): [Order!]!
+}
+
+type Mutation {
+    makeOrder(userId: String!,total:Float!, items: [OrderItemInput!]!): Order!
+}

@@ -1,22 +1,58 @@
-import {useCartStore} from '@/entities/cart/cart-store.ts'
+import {useCartStore} from '@/entities/cart/api/cart-store.ts'
 import { Link } from "react-router";
-
+import {MAKE_ORDER} from "@/entities/order/api/orderQuery.ts";
+import {useMutation} from "@apollo/client/react";
 const CartPage = () => {
+    const [mutate,{data,loading,error}] = useMutation(MAKE_ORDER)
     const cartStore = useCartStore((state) => state.products);
+    const userId = cartStore.length > 0 ? cartStore[0].user_id : null;
     const removeProduct = useCartStore((state)=>state.removeProduct)
+    const updateAmount = useCartStore((state) => state.updateAmount);
 
     const handleDeleteProduct = (id:string)=> {
         removeProduct(id)
     }
+    const total = cartStore.reduce((acc, item) => {
+        return acc + item.price * item.amount;
+    }, 0);
 
-    const conductPrice=(products)=>{
-        return products.reduce((acc, cur) => {
-            return acc + cur.price;
-        },0)
+
+    const handleCheckOut = async () => {
+        try {
+            const response = await fetch("http://localhost:5000/checkout-session", {
+                method: "POST",
+                headers: {"Content-Type": "application/json"},
+            })
+            const {url} = await response.json()
+            window.location.href = url;
+        } catch (error) {
+            console.log(error)
+        }
+
     }
 
-    const total = conductPrice(cartStore)
-    console.log(total)
+    const handleOrder = async () => {
+        try {
+            const result = await mutate({
+                variables: {
+                    userId: userId,
+                    total:total,
+                    items: cartStore.map((item) => ({
+                        gameId: item.id,
+                        amount: item.amount,
+                        price:item.price
+                    })),
+                },
+            });
+
+            if (result.data) {
+                alert("Order Successful!");
+            }
+        } catch (err) {
+            console.error("Mutation failed:", err);
+        }
+    };
+
     return (
         <div>
             {cartStore.length !== 0 ? (
@@ -34,6 +70,7 @@ const CartPage = () => {
                                         <div className='flex gap-4 items-center self-center w-[35%] justify-center' key={item.id}>
                                             <div className="relative">
                                                 <select
+                                                    onChange={(e)=>updateAmount(item.id,Number(e.target.value))}
                                                     className='appearance-none border border-gray-300 rounded-md pl-3 pr-8 py-1 h-9 text-sm bg-white cursor-pointer hover:border-blue-400 transition-colors focus:outline-none focus:ring-1 focus:ring-blue-500 custom-select-scroll'
                                                     defaultValue={item.amount}
                                                 >
@@ -64,12 +101,14 @@ const CartPage = () => {
                             </div>
                         </div>
                         <div className='w-[30%]'>
+
                             <div className='border rounded-md p-4 flex flex-col gap-4'>
                                 <div className='flex justify-between'>
-                                    <p className='font-medium'>Cart total</p>
-                                    <p></p>
+                                    <p className='font-medium text-lg'>Cart total</p>
+                                    <p className='font-medium text-lg'>{total} USD</p>
                                 </div>
-                                <button className='bg-[#0868f3] text-white h-10'>Continue to payment</button>
+                                <button onClick={handleCheckOut}
+                                        className='bg-[#0868f3] text-white h-10'>Continue to payment</button>
                             </div>
                         </div>
                     </div>

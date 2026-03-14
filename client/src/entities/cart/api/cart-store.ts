@@ -15,6 +15,7 @@ interface CartState {
     id: string | null;
     user_id: string | null;
     products: CartItem[]; // Now an array of objects
+    updateAmount: (productId: string, amount: number) => void;
 
     setUserId: (userId: string) => void;
     // 2. Update the action to accept the whole object (excluding amount)
@@ -31,6 +32,13 @@ export const useCartStore = create<CartState>()(
             products: [],
 
             setUserId: (userId) => set({ user_id: userId }),
+
+            updateAmount: (productId, amount) =>
+                set((state) => ({
+                    products: state.products.map((p) =>
+                        p.id === productId ? { ...p, amount } : p
+                    ),
+                })),
 
             addProduct: (newProduct) =>
                 set((state) => {

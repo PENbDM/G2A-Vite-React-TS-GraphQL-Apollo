@@ -31,13 +31,50 @@ model Game {
 
   createdAt    DateTime @default(now())
   updatedAt    DateTime @updatedAt
+
+  orderItems   OrderItem[]
 }
 
 model User {
-  id           String   @id @default(uuid())
-  email        String   @unique
-  password     String   // Add this field!
+  id        String   @id @default(uuid())
+  email     String   @unique
+  password  String
+  createdAt DateTime @default(now())
+
+  orders    Order[]
+}
+
+model Order {
+  id String @id @default(uuid())
+  userId String
+  total Float
+  status OrderStatus @default(PENDING)
+
+  user User @relation(fields: [userId],references: [id])
+  items OrderItem[]
+
   createdAt    DateTime @default(now())
+}
+
+model OrderItem {
+  id        String  @id @default(uuid())
+
+  orderId   String
+  gameId    String
+
+  price     Float   // price at time of purchase
+  amount  Int
+
+  order     Order   @relation(fields: [orderId], references: [id])
+  game      Game    @relation(fields: [gameId], references: [id])
+}
+
+enum OrderStatus {
+  PENDING
+  PAID
+  SHIPPED
+  COMPLETED
+  CANCELLED
 }
 
 enum Platform {

@@ -7,6 +7,13 @@
 *
 * 🟢 You can import this file directly.
 */
+export const OrderStatus = {
+    PENDING: 'PENDING',
+    PAID: 'PAID',
+    SHIPPED: 'SHIPPED',
+    COMPLETED: 'COMPLETED',
+    CANCELLED: 'CANCELLED'
+};
 export const Platform = {
     Steam: 'Steam',
     Pc: 'Pc',

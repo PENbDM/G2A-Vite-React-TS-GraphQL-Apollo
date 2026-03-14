@@ -2,7 +2,7 @@ import { useRef, useEffect, useState } from "react";
 import { Link } from "react-router";
 import { Input } from "@/components/ui/input";
 import { useAuthStore } from "@/entities/user/model/auth-store.ts";
-import {useCartStore} from "@/entities/cart/cart-store.ts";
+import {useCartStore} from "@/entities/cart/api/cart-store.ts";
 
 function Header() {
     const { user, isAuthenticated, logout } = useAuthStore();

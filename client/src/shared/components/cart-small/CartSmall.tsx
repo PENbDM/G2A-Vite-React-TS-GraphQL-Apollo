@@ -1,5 +1,5 @@
 import type { CartSmallType} from "@/shared/types/cart.ts";
-import {useCartStore} from '@/entities/cart/cart-store.ts'
+import {useCartStore} from '@/entities/cart/api/cart-store.ts'
 import {useAuthStore} from "@/entities/user/model/auth-store.ts";
 import AuthModal from "@/shared/components/modal/AuthModal.tsx";
 import React from 'react'
